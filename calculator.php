@@ -8,41 +8,45 @@
 <body>
     <?php
     if (isset($_POST["submit"])) {
-        $firstNumber = $_POST["first-number"];
-        $secondNumber = $_POST["second-number"];
-        $submit = $_POST["submit"];
-        $result = "";
-        switch ($submit) {
-            case "Add":
-                $result = $firstNumber + $secondNumber;
-                break;
-            case "Subtract":
-                $result = $firstNumber - $secondNumber;
-                break;
-            case "Multiply":
-                $result = $firstNumber * $secondNumber;
-                break;
-            case "Divide":
-                $result = round($firstNumber / $secondNumber, 2);
-                break;
-            case "Modulo":
-                $result = $firstNumber % $secondNumber;
-                break;
-            default:
-                $result = "error";
-                break;
+        if (!empty($_POST["first-number"]) && !empty(["first-number"])) {
+            $firstNumber = $_POST["first-number"];
+            $secondNumber = $_POST["second-number"];
+            $submit = $_POST["submit"];
+            $result = "";
+            switch ($submit) {
+                case "Add":
+                    $result = $firstNumber + $secondNumber;
+                    break;
+                case "Subtract":
+                    $result = $firstNumber - $secondNumber;
+                    break;
+                case "Multiply":
+                    $result = $firstNumber * $secondNumber;
+                    break;
+                case "Divide":
+                    $result = round($firstNumber / $secondNumber, 2);
+                    break;
+                case "Modulo":
+                    $result = $firstNumber % $secondNumber;
+                    break;
+                default:
+                    $result = "error";
+                    break;
+            }
+        } else {
+            echo "Er is iets fout gegaan!" . PHP_EOL;
         }
     }
     ?>
         <h1>Calculator</h1>
         <form method="post" class="form">
             <div>
-                <input type="number" name="first-number" required>
+                <input type="number" name="first-number" min=".01" step=".01" required>
                 <label for="firstnumber" class="label">First Number</label>
             </div>
             <div>
-                <input type="number" name="second-number" required>
-                <label for="second-number" class="label">Second Number</label>
+                <input type="number" name="second-number" min=".01" step=".01 required>
+                <label for=" second-number" class="label">Second Number</label>
             </div>
             <div>
                 <input type="submit" name="submit" value="Add">
@@ -53,5 +57,7 @@
             </div>
         </form>
         <h2>
-            Uitkomst: <?php if (isset($result)) { echo $result; } ?>
+            Uitkomst: <?php if (isset($result)) {
+                            echo $result;
+                        } ?>
         </h2>
